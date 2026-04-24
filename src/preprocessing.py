@@ -124,3 +124,24 @@ def smoothing(neural_data, sigma = 2):
 
     return smoothed
 
+def zscore_channels(neural_data):
+    '''
+    Normalize neural activity by channel
+
+    neural_data: should be in the format time x channels
+    '''
+
+    # find the mean of the data by channel, across time
+    mean = np.mean(neural_data, axis=0, keepdims=True)
+
+    # find std of data by channel, across time
+    std = np.std(neural_data, axis=0, keepdims=True)
+
+    # normalize the data
+    normalized = (neural_data - mean) / (std + 1e-8)
+
+    return normalized
+
+
+
+
