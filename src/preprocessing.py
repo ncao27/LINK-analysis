@@ -142,6 +142,19 @@ def zscore_channels(neural_data):
 
     return normalized
 
+def apply_pca(neural_data, n_components=10):
+    '''
+    Perform dimensionality reduction
 
+    neural_data: should be in the format time x channels
+    n_components: the number of components we keep
+    '''
+
+    # perform PCA with corresponding number of components
+    pca = PCA(n_components=n_components)
+
+    reduced = pca.fit_transform(neural_data)
+
+    return reduced, pca
 
 
