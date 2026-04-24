@@ -2,6 +2,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt
 from scipy.ndimage import gaussian_filter1d
 from sklearn.decomposition import PCA
+from scipy.ndimage import gaussian_filter1d
 
 
 def car(neural_data):
@@ -106,17 +107,20 @@ def thres_det(neural_data, threshold_multiplier = -4.5):
 
     return crossings, thresholds
 
-def spike_sorting():
+def smoothing(neural_data, sigma = 2):
     '''
-    Performs spike sorting
+    Performs smoothing
+
+    neural_data: should be in the format time x channels
+    sigma: variance of the gaussian function we smooth data with
     '''
 
-def binning():
-    '''
-    Performs binning
-    '''
+    # smooth with Gaussian filter
+    smoothed = gaussian_filter1d(
+        neural_data,
+        sigma=sigma,
+        axis=0
+    )
 
-def smoothening():
-    '''
-    Performs smoothening
-    '''
+    return smoothed
+
