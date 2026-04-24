@@ -12,6 +12,7 @@ def car(neural_data):
     '''
 
     # take the avg across time, independently for channels
+    # axis = 1 bc we remove shared noise across channels
     common_avg = np.mean(neural_data, axis = 1, keepdims = True)
 
     # subtract the common_avg from original data
@@ -51,10 +52,33 @@ def bandpass(fs, low_fc, high_fc, neural_data, order = 4):
 
 
 
-def whitening():
+def whitening(neural_data, e = 10e-6):
     '''
-    Performs whitening, time-wise, across channels
+    Performs whitening, time-wise, across channels. So basically at each time point
+    we remove cross-correlations in between channels.
+
+    neural_data: should be in the format time x channels
+    e = some small number to ensure nonzero denominator
     '''
+
+    # center data across time (note that CAR removes noise across channels)
+    centered = neural_data = np.mean(neural_data, axis = 0, keepdims = True)
+
+    # find the covariance matrix
+    cov = np.cov(centered, rowvar = False)
+
+    # find eigenvalues and eigenvectors
+    eigvals, eigvecs = np.linalg.eigh(cov)
+
+    # get the actual whitening matrix
+    whitening_matrix = eigvecs @ np.diag(1.0 / np.sqrt(eigvals + e)) @ eigvecs.T
+
+    # whiten the data
+    whitened_data = centered @ whitening_matrix
+
+    return whitened_data
+
+
 
 def thres_det():
     '''
