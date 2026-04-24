@@ -80,10 +80,31 @@ def whitening(neural_data, e = 10e-6):
 
 
 
-def thres_det():
+def thres_det(neural_data, threshold_multiplier = -4.5):
     '''
-    Performs threshold detection
+    Performs negative threshold detection
+
+    neural_data: should be in the format time x channels
+    threshold_multiplier: some float we multiply the rms with
     '''
+
+    # take the rms and multiply by threshold_multiplier
+    rms = np.sqrt(np.mean(neural_data ** 2, axis=0))
+    thresholds = threshold_multiplier * rms
+
+    # detect if we have a negative threshold
+    below_threshold = neural_data < thresholds[None, :]
+
+    # find the crossing_mask, regions where below threshold
+    crossing_mask = below_threshold[1:] & ~below_threshold[:-1]
+
+    # find specific time and channels based on crossing mask
+    time_idx, channel_idx = np.where(crossing_mask)
+
+    # find the specific crossing values
+    crossings = np.column_stack([time_idx + 1, channel_idx])
+
+    return crossings, thresholds
 
 def spike_sorting():
     '''
