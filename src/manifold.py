@@ -5,6 +5,7 @@ from sklearn.decomposition import PCA
 from scipy.ndimage import gaussian_filter1d
 from scipy.linalg import orthogonal_procrustes
 
+
 def procrustes_alignment(X, Z_target, n_components = 10):
     '''
     Dimensionality reduction using PCA on the manifold. Also learns the rotation matrix
@@ -31,5 +32,29 @@ def procrustes_alignment(X, Z_target, n_components = 10):
     R, scale = orthogonal_procrustes(A, B)
 
     return Z_target @ R * scale, R, scale
+
+def manifold_alignment(
+    X_src,
+    y_src,
+    X_tgt,
+    y_tgt,
+    neural_key = "SpikingBandPower",
+    behavior_key = "index_position",
+    n_components = 10,
+    smoothing_sigma = 2,
+    alpha = 1.0
+):
+    '''
+    Perform manifold alignment. This is done on data across sessions in hopes of learning
+    noise, electrodes moving, and neuroplasticity so that we can have higher cross-
+    session prediction accuracy.
+
+    Since preprocessing is done in the jupyter notebook, we assume that
+    X_src, y_src, X_tgt, y_tgt have already been normalized and preprocessed
+
+    For now we only care about Spiking Band Power, and we use that to predict index position
+    '''
+    return
+
 
 
