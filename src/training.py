@@ -10,7 +10,7 @@ def train_lstm_model(
     model,
     train_loader,
     test_loader,
-    num_epochs = 20,
+    num_epochs = 10,
     lr = 1e-3,
     device = "cpu"
 ):
@@ -27,7 +27,7 @@ def train_lstm_model(
     model = model.to(device)
 
     # adam gradient descent optimizer, MSE loss
-    optimizer = torch.optim.Adam(model.parameters(), lr = lr)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     loss_fn = nn.MSELoss()
 
     train_losses = []
