@@ -4,6 +4,15 @@ This project explores neural decoding using the **LINK dataset**, which contains
 
 The repository is structured so that preprocessing, dataset construction, model definition, and training logic are separated into modular files.
 
+## Setup
+
+Create the environment:
+
+```bash
+conda env create -f environment.yml
+conda activate neurocuda
+```
+
 ---
 
 # Repository Structure
