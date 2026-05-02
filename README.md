@@ -8,23 +8,22 @@ The repository is structured so that preprocessing, dataset construction, model 
 
 # Repository Structure
 
-LINK-NSP
-│
-├── data/
-│
-├── models/
-│ └── lstm.py
-│
-├── src/
-│ ├── preprocessing.py
-│ ├── training.py
-│ └── window.py
-│
-├── notebooks/
-│ └── link_analysis.ipynb
-│
+LINK-NSP  \ [Enter]
+│ \ [Enter]
+├── data/ \ [Enter]
+│ \ [Enter]
+├── models/ \ [Enter]
+│ └── lstm.py \ [Enter]
+│ \ [Enter]
+├── src/ \ [Enter]
+│ ├── preprocessing.py \ [Enter]
+│ ├── training.py \ [Enter]
+│ └── window.py \ [Enter]
+│ \ [Enter]
+├── notebooks/ \ [Enter]
+│ └── link_analysis.ipynb \ [Enter]
+│ \ [Enter]
 └── README.md
-
 
 ---
 
