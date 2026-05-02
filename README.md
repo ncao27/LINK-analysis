@@ -18,6 +18,8 @@ Run instructions:
 
 Under the folder "notebooks" contains link_analysis, which performs vanilla ridge regression on a single session of data. In addition, we have manifold alignment and a CNN. 
 
+Data available here: https://chesteklab.github.io/LINK_dataset/
+
 ---
 
 # Repository Structure
