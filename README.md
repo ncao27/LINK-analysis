@@ -13,6 +13,11 @@ conda env create -f environment.yml
 conda activate neurocuda
 ```
 
+## Setup
+Run instructions:
+
+Under the folder "notebooks" contains link_analysis, which performs vanilla ridge regression on a single session of data. In addition, we have manifold alignment and a CNN. 
+
 ---
 
 # Repository Structure
