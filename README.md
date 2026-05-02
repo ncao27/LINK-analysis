@@ -32,6 +32,10 @@ LINK-NSP
 │
 ├── notebooks/
 │   └── link_analysis.ipynb
+|   └── zak_notebooks
+|       └── convolutional_neural_network
+|       └── manifold_alignment
+|       └── trial_difference
 │
 └── README.md
 ```
