@@ -31,4 +31,6 @@ class NeuralSequenceDataset(Dataset):
         x_seq = self.X[start : stop]
         y_target = self.y[stop + self.predict_ahead - 1]
 
+        return x_seq, y_target
+
 

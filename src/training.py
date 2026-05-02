@@ -38,7 +38,7 @@ def train_lstm_model(
         model.train()
         total_loss = 0
 
-        for X_batch, y_batch in train_loader:
+        for batch_idx, (X_batch, y_batch) in enumerate(train_loader):
             X_batch = X_batch.to(device)
             y_batch = y_batch.to(device)
 
@@ -52,6 +52,9 @@ def train_lstm_model(
             loss.backward()             # backpropagation, compute gradients
             optimizer.step()            # update weights
             total_loss += loss.item()   # sum up losses
+
+            if batch_idx % 100 == 0:
+                print(f"Epoch {epoch+1}, batch {batch_idx}/{len(train_loader)}, loss={loss.item():.4f}", flush=True)
 
         avg_loss = total_loss / len(train_loader)
         train_losses.append(avg_loss)  
@@ -77,7 +80,7 @@ def evaluate_lstm_model(model, data_loader, device="cpu"):
 
         # for loop to run inference on dataset
         for X_batch, y_batch in data_loader:
-            X_batch = X_batch.to_device()
+            X_batch = X_batch.to(device)
 
             # get predictions on the input sbp data
             y_pred = model(X_batch).cpu().numpy()
